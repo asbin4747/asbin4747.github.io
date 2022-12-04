@@ -4,12 +4,12 @@ import experienceData from "./Components/ExperienceData.json";
 
 export default function ExperiencePage() {
   return (
-    <React.Fragment>
+    <div>
       {experienceData.map((experience, index) => (
         <div key = {index} className="flex justify-center">
           <ExperienceCard key={index} data={experienceData[index]} />
         </div>
       ))}
-    </React.Fragment>
+    </div>
   );
 }
