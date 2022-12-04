@@ -1,2 +1,2 @@
 # Personal-Website
-Personal website
+This is personal website created using Next.js, React, TailwindCSS and MaterialUI.
