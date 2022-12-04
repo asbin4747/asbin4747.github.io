@@ -36,7 +36,6 @@ export default function ContactForm() {
     const data = new FormData(event.currentTarget);
     emailjs.sendForm(serviceId, templateId, form.current, publicKey).then(
       (result) => {
-        console.log(result);
         setSuccess(true);
         setTimeout(() => {
           router.push("/");
@@ -114,7 +113,6 @@ export default function ContactForm() {
             <Button
               className="bg-purple-800 text-white hover:none"
               type="submit"
-              variant="outlined"
               sx={{ mt: 3, mb: 2 }}
             >
               Contact

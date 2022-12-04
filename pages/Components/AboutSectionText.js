@@ -7,7 +7,7 @@ export default function AboutSectionText() {
   return (
     <CardContent className="shadow-2xl blue_background text-center m-2 p-4 sm:m-4 sm:p-8 sm:max-w-4xl sm:mx-auto">
       <Container maxWidth="lg">
-        <Typography className="text-black text-3xl md:text-6xl mb-2">
+        <Typography className="text-black text-3xl sm:text-5xl mb-2">
           ABOUT ME
         </Typography>
         <Typography className="text-black md:text-2xl animate-pulse">
