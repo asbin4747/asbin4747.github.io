@@ -5,11 +5,9 @@ import experienceData from "./Components/ExperienceData.json";
 export default function ExperiencePage() {
   return (
     <div>
-      {experienceData.map((experience, index) => (
-        <div key = {index} className="flex justify-center">
-          <ExperienceCard key={index} data={experienceData[index]} />
+        <div className="flex justify-center">
+          <ExperienceCard />
         </div>
-      ))}
     </div>
   );
 }
