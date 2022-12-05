@@ -9,7 +9,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import emailjs from "@emailjs/browser";
-import Success from "../Success";
+import FormValidationResponse from "./FormValidationResponse";
+import FailedResponse from "./FailedResponse";
 import { useRouter } from "next/router";
 
 const theme = createTheme({
@@ -23,35 +24,86 @@ const theme = createTheme({
 });
 
 export default function ContactForm() {
-  const [value, setValue] = useState("");
-  const [success, setSuccess] = useState("");
+  const [textMessage, setTextMessage] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [failedResponse, setFailedResponse] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [isError, setIsError] = useState(false);
   const router = useRouter();
   const form = useRef();
   const serviceId = process.env.NEXT_PUBLIC_SERVICE_ID;
   const templateId = process.env.NEXT_PUBLIC_TEMPLATE_ID;
   const publicKey = process.env.NEXT_PUBLIC_PUBLIC_KEY;
 
+  const handleValidation = () => {
+    let formIsValid = true;
+
+    //Name
+    if (!name) {
+      formIsValid = false;
+      errors["name"] = "Name cannot be empty";
+    }
+
+    if (typeof name !== "undefined") {
+      if (!name.match(/^[\s*a\s*-z\s*A\s*-Z\s*]+$/)) {
+        formIsValid = false;
+        errors["name"] = "Name is not valid";
+      }
+    }
+
+    //Email
+    if (!email) {
+      formIsValid = false;
+      errors["email"] = "Email cannot be empty";
+    }
+
+    if (typeof email !== "undefined") {
+      let lastAtPos = email.lastIndexOf("@");
+      let lastDotPos = email.lastIndexOf(".");
+
+      if (
+        !(
+          lastAtPos < lastDotPos &&
+          lastAtPos > 0 &&
+          email.indexOf("@@") == -1 &&
+          lastDotPos > 2 &&
+          email.length - lastDotPos > 2
+        )
+      ) {
+        formIsValid = false;
+        errors["email"] = "Email is not valid";
+      }
+    }
+
+    setErrors({ errors: errors });
+    setIsError(true);
+    return formIsValid;
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    emailjs.sendForm(serviceId, templateId, form.current, publicKey).then(
-      (result) => {
-        setSuccess(true);
-        setTimeout(() => {
-          router.push("/");
-        }, 5000);
-      },
-      (error) => {
-        console.log(error);
-        <div>Sorry, Something wrong with our server. Please try again!</div>;
-      }
-    );
-    event.target.reset();
-    setValue("");
-  };
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
+    if (handleValidation()) {
+      emailjs.sendForm(serviceId, templateId, form.current, publicKey).then(
+        (result) => {
+          setSuccess(true);
+          setTimeout(() => {
+            router.push("/");
+          }, 5000);
+        },
+        (error) => {
+          setFailedResponse(true);
+        }
+      );
+      event.target.reset();
+      setTextMessage("");
+      setName("");
+      setEmail("");
+    } else {
+      setIsError(true);
+    }
   };
 
   return (
@@ -88,6 +140,8 @@ export default function ContactForm() {
               id="name"
               label="Name"
               name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               autoFocus
             />
             <TextField
@@ -96,9 +150,10 @@ export default function ContactForm() {
               fullWidth
               id="email"
               label="Email Address"
+              value={email}
               name="email"
               autoComplete="email"
-              autoFocus
+              onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
               id="outlined-multiline-flexible"
@@ -106,21 +161,24 @@ export default function ContactForm() {
               name="message"
               multiline
               rows={8}
-              value={value}
-              onChange={handleChange}
+              value={textMessage}
+              onChange={(e) => setTextMessage(e.target.value)}
               fullWidth
             />
             <Button
-              className="bg-purple-800 text-white hover:none"
+              className=" border-2 bg-purple-800 text-white hover:none"
               type="submit"
+              variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
               Contact
             </Button>
           </Box>
-          {
-            success && <Success />
-          }
+          {success && <FormValidationResponse success={success} />}
+          {failedResponse && (
+            <FormValidationResponse failedResponse={failedResponse} />
+          )}
+          {isError && <FormValidationResponse errors={errors} />}
         </Box>
       </Container>
     </ThemeProvider>
