@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import ExperienceCard from "./Components/ExperienceCard";
 
 export default function ExperiencePage() {
