@@ -10,7 +10,6 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import emailjs from "@emailjs/browser";
 import FormValidationResponse from "./FormValidationResponse";
-import FailedResponse from "./FailedResponse";
 import { useRouter } from "next/router";
 
 const theme = createTheme({

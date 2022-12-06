@@ -3,6 +3,7 @@ import Link from "next/link";
 import Avatar from "@mui/joy/Avatar";
 
 function Header() {
+  const prefix = process.env.NEXT_PUBLIC_BASE_PATH || '';
   return (
     <>
       <div className="gradient_background flex sm:flex-row flex-col text-white sm:text-2xl font-base">
@@ -12,7 +13,7 @@ function Header() {
               <div>
                 <Avatar
                   alt="Asbin"
-                  src="/pic.jpg"
+                  src={prefix + "/pic.jpg"}
                   size="lg"
                   sx={{
                     height: "100px",

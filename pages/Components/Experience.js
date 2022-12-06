@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 
 export default function Experience() {
   const router = useRouter();
+  const prefix = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -26,7 +27,7 @@ export default function Experience() {
             <div className="flex flex-col p-2 space-y-2 sm:p-12 sm:space-x-4 items-center blue_background">
                 <Avatar
                   alt="Asbin"
-                  src={experience.cardTitle.imgSource}
+                  src={prefix + experience.cardTitle.imgSource}
                   sx={{
                     height: ["100px","150px"],
                     width: ["100px","150px"],

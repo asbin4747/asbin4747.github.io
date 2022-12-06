@@ -3,6 +3,7 @@ import React from "react";
 import experienceData from "./ExperienceData.json";
 
 export default function ExperienceCard() {
+  const prefix = process.env.NEXT_PUBLIC_BASE_PATH || '';
   return (
     <div className="flex flex-col">
       {experienceData.map((experience, index) => (
@@ -16,7 +17,7 @@ export default function ExperienceCard() {
                 <Image
                   alt=""
                   objectfit="contain"
-                  src={experience.cardTitle.imgSource}
+                  src={prefix + experience.cardTitle.imgSource}
                   width={100}
                   height={100}
                 />
