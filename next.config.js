@@ -7,8 +7,8 @@ const nextConfig = {
 
   },
   reactStrictMode: true,
-  basePath: "/nextjs-pages",
-  assetPrefix:"/nextjs-pages",
+  basePath: "/aboutme",
+  assetPrefix:"/aboutme",
 };
 
 module.exports = nextConfig;
