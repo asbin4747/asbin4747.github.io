@@ -1,9 +1,8 @@
-import Image from "next/image";
 import React from "react";
 import experienceData from "./ExperienceData.json";
 
 export default function ExperienceCard() {
-  const prefix = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
   return (
     <div className="flex flex-col">
       {experienceData.map((experience, index) => (
