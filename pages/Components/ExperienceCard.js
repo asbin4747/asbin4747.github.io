@@ -14,7 +14,7 @@ export default function ExperienceCard() {
           <div className="flex flex-col p-3">
             <div className="flex flex-row border-4 p-2 space-x-4 bg-slate-200">
               <div>
-                <Image
+                <img
                   alt=""
                   objectfit="contain"
                   src={prefix + experience.cardTitle.imgSource}
