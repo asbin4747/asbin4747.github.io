@@ -36,6 +36,9 @@ jobs:
     - run: npm run export
       env:
         NEXT_PUBLIC_BASE_PATH: /aboutme
+        NEXT_PUBLIC_SERVICE_ID: ${{secrets. NEXT_PUBLIC_BASE_PATH}}
+        NEXT_PUBLIC_TEMPLATE_ID: ${{secrets.NEXT_PUBLIC_TEMPLATE_ID}}
+        NEXT_PUBLIC_PUBLIC_KEY: ${{secrets.NEXT_PUBLIC_PUBLIC_KEY}}
     - run: touch ./out/.nojekyll
     
     - name: Deploy 🚀
