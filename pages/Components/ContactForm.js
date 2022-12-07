@@ -32,9 +32,9 @@ export default function ContactForm() {
   const [isError, setIsError] = useState(false);
   const router = useRouter();
   const form = useRef();
-  const serviceId = process.env.NEXT_PUBLIC_SERVICE_ID.replace("","");
-  const templateId = process.env.NEXT_PUBLIC_TEMPLATE_ID.replace("","");
-  const publicKey = process.env.NEXT_PUBLIC_PUBLIC_KEY.replace("","");
+  const serviceId = process.env.NEXT_PUBLIC_SERVICE_ID.replace("\"","");
+  const templateId = process.env.NEXT_PUBLIC_TEMPLATE_ID.replace("\"","");
+  const publicKey = process.env.NEXT_PUBLIC_PUBLIC_KEY.replace("\"","");
 
   const handleValidation = () => {
     let formIsValid = true;
