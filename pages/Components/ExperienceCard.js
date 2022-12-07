@@ -32,7 +32,6 @@ export default function ExperienceCard() {
                 <div>{experience.cardTitle.location ?? ""}</div>
               </div>
             </div>
-
             <div className="p-2">
               {experience.jobDescription.jobDuties.map((duty, index) => (
                 <li key={index}>
