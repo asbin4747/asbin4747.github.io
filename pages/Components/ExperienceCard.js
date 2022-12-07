@@ -1,5 +1,6 @@
 import React from "react";
 import experienceData from "./ExperienceData.json";
+import Image from "next/image";
 
 export default function ExperienceCard() {
   const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
@@ -34,9 +35,9 @@ export default function ExperienceCard() {
             </div>
             <div className="p-2">
               {experience.jobDescription.jobDuties.map((duty, index) => (
-                <li key={index}>
-                  <div key={index}> {duty.jobDuty} </div>
-                </li>
+                <div key={index}>
+                  <li>{duty.jobDuty}</li>{" "}
+                </div>
               ))}
             </div>
           </div>
